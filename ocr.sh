@@ -10,6 +10,7 @@ for i in `ls *.tif | sed -e 's/out\(.*\)\.tif/\1/g'`
 do
     tesseract out${i}.tif ${WRKDIR}/text${i} -l fra
     cat ${WRKDIR}/text${i}.txt >> text.txt
+    rm text${i}.txt
 done
 
 cd ..

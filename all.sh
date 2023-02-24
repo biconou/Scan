@@ -1,11 +1,22 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 
 . ./env.sh
 
-rm -rf ${WRKDIR}
-mkdir ${WRKDIR}
+NOW=`date +"%Y-%m-%d_%H%M%S"`
+export DOC_NAME=${NOW}
+export WRKDIR=`pwd`/wrk/${DOC_NAME}
+mkdir -p ${WRKDIR}
 
-./scan.sh
+double=$1
+
+if [[ -n ${double} && ${double} = "double" ]]
+then
+    echo "scan recto/verso demandé"
+else 
+    echo "scan recto demandé"
+fi
+
+./scan.sh ${double}
 
 ./ocr.sh
 
